@@ -1,0 +1,40 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Projects\\BH\\Assema\\backend\\logs\\.ebbbc9507639ad8aa804297ab82ceb346b7d239f-audit.json",
+    "files": [
+        {
+            "date": 1690264026448,
+            "name": "D:\\Projects\\BH\\Assema\\backend\\logs\\nodejs-guide-2023-07-25.log",
+            "hash": "93fb5bfa10fae987cd53a84e07fd633a27bfb44c7165f4cf2858925e2aefee8d"
+        },
+        {
+            "date": 1690350744844,
+            "name": "D:\\Projects\\BH\\Assema\\backend\\logs\\nodejs-guide-2023-07-26.log",
+            "hash": "7cfbc1fcceb0970cc737601537da6fe80364eb02950504e0d603545729c7ff2e"
+        },
+        {
+            "date": 1690781323217,
+            "name": "D:\\Projects\\BH\\Assema\\backend\\logs\\nodejs-guide-2023-07-31.log",
+            "hash": "f6c8a6e73cab70f28b02f817ebbd7039de284c70fef6d68bb4f2fc00e7c6741e"
+        },
+        {
+            "date": 1690953411081,
+            "name": "D:\\Projects\\BH\\Assema\\backend\\logs\\nodejs-guide-2023-08-02.log",
+            "hash": "bdc52742eaa012e7f507c7c6b999a906cc441589de2986f77d1e37f68c29dece"
+        },
+        {
+            "date": 1691040629503,
+            "name": "D:\\Projects\\BH\\Assema\\backend\\logs\\nodejs-guide-2023-08-03.log",
+            "hash": "abf28f53479659bf5549df3ccc4e24123bd757f6c8b5fb59dbc977810f81362b"
+        },
+        {
+            "date": 1691129952978,
+            "name": "D:\\Projects\\BH\\Assema\\backend\\logs\\nodejs-guide-2023-08-04.log",
+            "hash": "b959f443959c2bfbc00b586aca04a23eaf91034984dda21c2dca3f738c9d6058"
+        }
+    ],
+    "hashType": "sha256"
+}

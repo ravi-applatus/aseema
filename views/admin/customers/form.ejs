@@ -1,0 +1,123 @@
+<%- include("../../partials/headerlinks") %>
+<%- include("../../partials/header") %>
+<%- include("../../partials/sidebar") %>
+<style>
+ .user_form_body input[type=text], select, textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.user_form_body input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user_form_body input[type=submit]:hover {
+  background-color: #45a049;
+}
+.user_form_body select{
+    height: 37.5px;
+    outline: none;
+}
+.user_form_footer{
+    padding: unset;
+}
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+
+<div class="vertical-overlay"></div>
+
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="user_form_box">                    
+                    <div class="container">     
+                         <form id="createproduct-form"  class="needs-validation" method="post" action="/admin/customers/form" novalidate enctype="multipart/form-data">                  
+                    <!-- <form method="post" action="/admin/users/form" novalidate enctype="multipart/form-data" > -->
+                        <div class="user_form_body">
+                            <div class="row"> 
+                                <div class="mb-3" style="display: none;">
+                                    <input type="hidden" class="form-control" id="updateId" name="updateId" value= "<%= userdata.id || '' %>"  required>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="customername-field" class="form-label">Customer First Name</label>
+                                    <input type="text" id="firstName" name="firstName" class="form-control"  value= "<%= userdata.firstName || '' %>" placeholder="Enter First Name" required />
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="customername-field" class="form-label">Customer Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" class="form-control"  value= "<%= userdata.lastName || '' %>" placeholder="Enter Last Name" required />
+                                </div>
+                           </div>      
+                            <div class="row">  
+                                <% if (userdata.email) { %>
+                                <div class="mb-3 col">
+                                    <label for="email-field" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control"  value= "<%= userdata.email || '' %>" placeholder="Enter email" readonly />
+                                </div>   
+                                <% } else { %>
+                                <div class="mb-3 col">
+                                    <label for="email-field" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control"  value= "<%= userdata.email || '' %>" placeholder="Enter email" required />
+                                </div>
+                                <% } %>
+                                <!-- <div class="mb-3 col">
+                                    <label for="phone-field" class="form-label">Phone</label>
+                                    <input type="text" id="mobile" name="mobile" class="form-control"  value= "<%= userdata.mobile || '' %>" placeholder="Enter phone no." required />
+                                </div>          -->
+                           </div>
+                           <div class="row">              
+                            <div class="mb-3 col">
+                                <label for="choices-publish-status-input" class="form-label">Status</label>
+
+                                    <select class="form-select" name="status" id="choices-publish-status-input" data-choices data-choices-search-false>
+                                        <option value="Active" <%= userdata.status === 'Active' ? 'selected' : '' %>>Active</option>
+                                        <option value="Inactive"<%= userdata.status === 'Inactive' ? 'selected' : '' %>>Inactive</option>
+                                    </select>                                    
+                            </div>
+                       </div>
+                        </div>
+                        <div class="user_form_footer">
+                            <div class="hstack gap-2 justify-content-end">
+                                <button type="button" class="btn btn-secondary w-sm" onclick="history.back()">Back</button>
+                                <button type="submit" class="btn btn-success w-sm">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © Velzon.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Themesbrand
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </footer>
+    </div>
+
+
+
+<%- include("../../partials/footerlinks") %>
+<%- include("../../partials/footer") %>

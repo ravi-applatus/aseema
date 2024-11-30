@@ -1,0 +1,285 @@
+<%- include("../../partials/headerlinks") %>
+<%- include("../../partials/header") %>
+<%- include("../../partials/sidebar") %>
+
+            <!-- Vertical Overlay-->
+            <div class="vertical-overlay"></div>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">Cms</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                            <li class="breadcrumb-item active">Cms</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+                        <!-- end card -->
+                    </div>
+                    <!-- end col -->
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="card" id="subscriptionlist">
+                                <div class="card-header border-bottom-dashed">
+
+                                    <div class="row g-4 align-items-center">
+                                        <div class="col-sm">
+                                            <!-- <div>
+                                                <h5 class="card-title mb-0">Banner Ads</h5>
+                                            </div> -->
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="card-body border-bottom-dashed border-bottom">
+                                    <form>
+                                        <div class="row g-3">
+                                            <div class="col-xl-12" style="text-align: center;">
+                                                <strong>Cms</strong>
+                                            </div>
+                                            <!--end col-->
+                                        </div>
+                                        <!--end row-->
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <div class="table-responsive table-card mb-1">
+                                            <table class="table align-middle" id="customerTable">
+                                                <thead class="table-light text-muted">
+                                                    <!-- <tr>
+                                                        <th scope="col" style="width: 50px;">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="checkAll" value="option">
+                                                            </div>
+                                                        </th>
+                                                        
+                                                    </tr> -->
+                                                </thead>   
+                                                 <tbody class="list form-check-all">
+                                                    <% cmsList.forEach(function(cmsfun){%>
+                                                        <tr class="edit_icon_id_<%=cmsfun.id%>" style="text-align: center;" >
+                                                            
+                                                            <td id="<%= cmsfun.id %>" onclick="optionslist('<%= cmsfun.id %>')" name="Drop" value="<%= cmsfun.id %>"><%=cmsfun.title%> </td>
+                                                            <!-- <td><span class="badge <%=cmsfun.status=='y' ? 'badge-soft-success':'badge-soft-danger'%> text-uppercase'%>"><%=cmsfun.status=='y' ? "Enabled":"Disabled"%></span>
+                                                            </td> -->
+                                                            <td>
+                                                                <ul class="list-inline hstack gap-2 mb-0 " style="float: right;">
+                                                                    <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                                                        <a href="#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
+                                                                        <a href="/admin/cms/form/<%=cmsfun.id%>"><i class="ri-pencil-fill fs-16 edit-icon" id="edit_icon_id"></i></a>
+                                                                    </a>
+                                                                    </li>
+                                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                                                        <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal">
+                                                                        <i class="ri-delete-bin-5-fill fs-16 delete-icon" id="<%=cmsfun.id%>"></i>
+                                                                    </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                        <% })%>
+                                                </tbody>                                            
+                                            </table>
+                                            <div class="noresult" style="display: none">
+                                                <div class="text-center">
+                                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
+                                                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                    <p class="text-muted mb-0">We've searched more than 150+ customer We did not find any customer for you search.</p>
+                                                </div>
+                                            </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mt-2 text-center">
+                                                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                                        <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                                                            <h4>Are you sure ?</h4>
+                                                            <p class="text-muted mx-4 mb-0">Are you sure you want to remove this record ?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                        <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn w-sm btn-danger" id="delete-record">Yes, Delete It!</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end modal -->
+                                </div>
+                            </div>
+                            
+                       
+                        </div>
+                        
+                        <!--end col-->
+                    </div>
+                   
+                    <!-- end col -->
+                </div>
+                 <div class="card col-md-9" id="cms_right"> 
+                         <div class="cms_btn_box">
+                                            <div>
+                                                <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                                <a href="/admin/cms/form"><button type="button"  class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Cms</button></a>
+
+                                                <!-- <button type="button" class="btn btn-info"><i class="ri-file-download-line align-bottom me-1"></i> Import</button> -->
+                                            </div>
+                                        </div>
+                            <table>   
+                                <thead>                             
+                            <!-- end card header -->
+                            <tr></tr>
+                            <div class="row">
+                                <th>
+                                <div class="col-sm-4 max_width">
+                                    <label class="control-label" for="optionLabel">Title</label></div>
+                            </th>
+                            <th>
+                                <div class="col-sm-4 max_width">
+                                    <label class="control-label" for="optionValue">Slug</label> </div>
+                            </th>
+                            <th>
+                                <div class="col-sm-4 max_width">
+                                    <label class="control-label" for="optionOrder">Status </label></div>
+                            </th>
+                            </div> 
+                           </tr>
+                             </thead>
+                            <tbody name="xyz" id="xyz">
+                                     
+                             </tbody> 
+                           </table> 
+                           <!-- end col -->
+                        </div>
+                <!-- end row -->
+
+            </div>
+            <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> © Velzon.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Themesbrand
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            </div>
+            <!-- end main content-->
+            </div>
+            <!-- END layout-wrapper -->
+
+<%- include("../../partials/footerlinks") %>
+<%- include("../../partials/footer") %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+                        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  function optionslist(val) {
+    // const selectedOption = $('input[name="Drop"]:checked').map(function() {
+    //     return $(this).val();
+    //     }).get();
+         
+    $.ajax({
+      url: "<%= adminbaseurl %>/cms/description", 
+      type: "GET",
+      data: { id: val },
+      success: function (response) {
+         
+        $("#xyz").empty();
+        response.cms_d.forEach(function (cms) {
+          $("#xyz").append(
+            `<tr>
+                <td>${cms.title}</td>
+                <td>${cms.slug}</td>
+                <td>${cms.status}</td>
+            </tr>`);
+        });
+      },
+      error: function (e) {
+        console.log("ERROR:", e);
+      },
+    });
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    var delete_id = null;
+        $(".delete-icon").click(function() {
+            delete_id = $(this).attr('id');
+        });
+
+
+        $("#delete-record").click(function() {
+            if(delete_id > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "<%=baseurl%>admin/cms/delete",
+                    data: {"id": delete_id},
+                    dataType: "json",
+                    success: function(resp){
+                        resp = JSON.parse(JSON.stringify(resp));
+                        if(resp.success) {
+                            Swal.fire(
+                                resp.message,
+                                '',
+                                'success',
+                            ).then(function() {
+                                location.reload();
+                            })
+                        }
+                    },
+                    error: function(error){
+                        console.log(error);
+                        if(error.success) {
+                            Swal.fire(
+                                error.message,
+                                '',
+                                'error',
+                            )
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+</script>

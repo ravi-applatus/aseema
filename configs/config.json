@@ -1,0 +1,28 @@
+{
+    "development": {
+      "username": "root",
+      "password": "DT33qp@1cmpD", 
+      "database": "magazine",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
+      "dialectOptions": {
+        "useUTC": false 
+      },
+      "timezone": "+05:30"
+    },
+    "test": {
+      "username": "root",
+      "database": "nidanx",
+      "password": "",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "root",
+      "password": "",
+      "database": "nidanx",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    }
+  }
+

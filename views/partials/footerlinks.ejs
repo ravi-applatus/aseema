@@ -1,0 +1,41 @@
+<script src="<%=baseurl%>assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<%=baseurl%>assets/libs/simplebar/simplebar.min.js"></script>
+<script src="<%=baseurl%>assets/libs/node-waves/waves.min.js"></script>
+<script src="<%=baseurl%>assets/libs/feather-icons/feather.min.js"></script>
+<script src="<%=baseurl%>assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+<script src="<%=baseurl%>assets/js/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="<%=baseurl%>assets/js/pages/form-validation.init.js"></script>
+<script src="<%=baseurl%>assets/libs/dropzone/dropzone-min.js"></script>
+<script src="<%=baseurl%>assets/libs/dropzone/form-file-upload.init.js"></script>
+<!-- ckeditor -->
+ <!-- <script src="<%=baseurl%>assets/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>  -->
+ <script src="<%=baseurl%>assets/libs/ckeditor/ckeditor.js"></script>
+<script src="<%=baseurl%>assets/js/pages/form-editor.init.js"></script>
+<!-- App js -->
+<!-- <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script> -->
+<script src="<%=baseurl%>assets/js/app.js"></script>
+
+
+<% if(typeof messages !== 'undefined' && messages !='' ) {%>
+    <script type="text/javascript">
+        Swal.fire(
+        '<%=messages%>',
+        '',
+        'success',
+        ).then(() => {
+            messages = "";
+        });
+    </script>
+<%}%>
+<% if(typeof errors !== 'undefined' && errors !='' ) {%>
+    <script type="text/javascript">
+        Swal.fire(
+        '<%=errors%>',
+        '',
+        'error'
+        ).then(() => {
+            errors = "";
+        });
+    </script>
+<% }%>

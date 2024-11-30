@@ -1,0 +1,434 @@
+<%- include("../../partials/headerlinks") %>
+    <%- include("../../partials/header") %>
+        <%- include("../../partials/sidebar") %>
+
+            <!-- Vertical Overlay-->
+            <div class="vertical-overlay"></div>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">Create Order</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                            <li class="breadcrumb-item active">Create Orders</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <form id="createcmsr-form" class="needs-validation" method="post"  novalidate enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card ">
+                                        <div class="card-body row">
+                                              <div class="mb-3" style="display: none">
+                                                <input type="hidden" class="form-control" id="updateId" name="updateId" value="<%=order.id%>" required>
+                                            </div>  
+
+                                           <!-- <div class="mb-3" style="display: none">
+                                                <input type="hidden" class="form-control" id="paymentTransactionId" name="paymentTransactionId" value="<%=order.paymentTransactionId%>" >
+                                            </div>   -->
+
+                                             <div class="mb-3 col-6">
+                                                            <!-- <div class="card-header align-items-center category_box"> -->
+                                                                <label class="card-title">Customer Name</label>
+                                                                <select name="customerId" id="customerId" onchange="filterContent()"
+                                                                    class="form-select" required <%= title === 'Update order' ? 'disabled' : '' %>>
+                                                                    <option value="">Select Customer Name</option>
+                                                                    <% customerList.forEach(function(order_data){%>      
+                                                                        
+                                                                            <option <% if(order.customerId==order_data.id ){ %>selected="selected" <% }%>   value="<%= order_data ? order_data.id : '' %>"><%= order_data ? order_data.firstName + ' ' + order_data.lastName : '' %></option>
+                                                                        <% })%>
+                                                                        
+                                                                 
+                                                                </select>
+                                                                <div class="invalid-feedback">This field is required.</div>
+                                                            <!-- </div> -->
+                                                  </div>    
+
+                                                  <% if(title != 'Update order'){%>
+                                             <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">OrderDateTime <span class="requiredField">*</span></label>
+                                                <input type="date" class="form-control" id="orderDateTime" name="orderDateTime" value="<%=order.orderDateTime%>" placeholder="Enter order date" required>
+                                            </div>  
+                                            <%} else {%>
+                                             <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">OrderDateTime <span>*</span></label>
+                                                <input type="date" class="form-control" id="orderDateTime" name="orderDateTime" value="<%=order.orderDateTime%>" placeholder="Enter order date" required readonly>
+                                            </div>  
+                                              <%}%>
+
+                                               
+                                           <div class="mb-3 col-6">
+                                                    <label class="card-title">Subscription Name</label>
+                                                    <select name="subscriptionId" id="subscriptionId" class="form-select" <%= title === 'Update order' ? 'disabled' : '' %>>
+                                                        <option value="">Select Subscription Name</option>
+                                                        <% subscriptionList.forEach(function(order_data) { %>
+                                                            <option value="<%= order_data.id %>"
+                                                                data-months="<%= order_data.noOfMonths %>"
+                                                                data-amounts="<%= order_data.fees %>"
+                                                                data-tax="<%= order_data.tax %>"
+                                                                <%= order.subscriptionId == order_data.id ? "selected='selected'" : '' %>>
+                                                                <%= order_data.title %>
+                                                            </option>
+                                                        <% }) %>
+                                                    </select>
+                                                    <div class="invalid-feedback">This field is required.</div>
+                                                </div>
+
+                                                     <% if(title != 'Update order'){%>
+                                                <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Subscription Months</label>
+                                                <input type="number" class="form-control" id="subscriptionMonths" name="subscriptionMonths" value="<%=order.subscriptionMonths%>" placeholder="Enter months" required >
+                                            </div>
+                                               <%} else {%>
+                                                <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Subscription Months</label>
+                                                <input type="number" class="form-control" id="subscriptionMonths" name="subscriptionMonths" value="<%=order.subscriptionMonths%>" placeholder="Enter months" required readonly >
+                                            </div>
+                                        <%}%>
+                                        
+                                                <% if(title != 'Update order'){%>
+                                                    <div class="mb-3 col-6">
+                                                        <label class="form-label" for="title">Subscription Start Date</label>
+                                                        <input type="date" class="form-control" id="subscriptionStartDate" name="subscriptionStartDate" value="<%=order.subscriptionStartDate%>" placeholder="Enter start date" required>
+                                                    </div> 
+                                                     <%} else {%>
+                                                        <div class="mb-3 col-6">
+                                                        <label class="form-label" for="title">Subscription Start Date</label>
+                                                        <input type="date" class="form-control" id="subscriptionStartDate" name="subscriptionStartDate" value="<%=order.subscriptionStartDate%>" placeholder="Enter start date" required readonly>
+                                                    </div> 
+                                                <%}%>
+                                         
+                                             <% if(title != 'Update order'){%>
+                                             <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Amount</label>
+                                                <input type="number" class="form-control" id="amount" name="amount" value="<%=order.amount%>" placeholder="Enter amount" required>
+                                            </div>
+                                                 <%} else {%>
+                                                     <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Amount</label>
+                                                <input type="number" class="form-control" id="amount" name="amount" value="<%=order.amount%>" placeholder="Enter amount" required readonly>
+                                            </div>
+                                             <%}%>
+                                             <% if(title != 'Update order'){%>
+                                             <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Tax(%)</label>
+                                                <input type="number" class="form-control" id="tax" name="tax" value="<%=order.tax%>" placeholder="Enter tax" required  >
+                                            </div>
+                                                 <%} else {%>
+                                                    <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Tax(%)</label>
+                                                <input type="number" class="form-control" id="tax" name="tax" value="<%=order.tax%>" placeholder="Enter tax" required readonly>
+                                            </div>
+                                            <%}%>
+                                            <% if(title != 'Update order'){%>
+                                             <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Discount</label>
+                                                <input type="number" class="form-control" id="discount" name="discount" value="<%=order.discount%>" placeholder="Enter discount" >
+                                            </div>
+                                            <%} else {%>
+                                                <div class="mb-3 col-6">
+                                                    <label class="form-label" for="title">Discount</label>
+                                                    <input type="number" class="form-control" id="discount" name="discount" value="<%=order.discount%>" placeholder="Enter discount" >
+                                                </div>
+                                                <%}%>
+                                             <div class="mb-3 col-6">
+                                                    <label class="form-label" for="title">Total</label>
+                                                    <input type="number" class="form-control" id="total" name="total" value="<%=order.total%>" placeholder="Total amount" required readonly>
+                                                </div>
+
+                                             <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Payment Transaction Amount</label>
+                                                <input type="number" step="0.01" class="form-control" id="paymentTransactionAmount" name="paymentTransactionAmount" value="<%=order.paymentTransactionAmount%>" placeholder="Enter transaction amount" required>
+                                            </div>
+                                             
+                                             <% if(title != 'Update order'){%>
+                                             <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Payment Transaction DateTime</label>
+                                                <input type="date" class="form-control" id="paymentTransactionDateTime" name="paymentTransactionDateTime" value="<%=order.paymentTransactionDateTime%>" placeholder="Enter transaction datetime" required>
+                                            </div> 
+                                             <%} else {%>
+                                                 <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Payment Transaction DateTime</label>
+                                                <input type="date" class="form-control" id="paymentTransactionDateTime" name="paymentTransactionDateTime" value="<%=order.paymentTransactionDateTime%>" placeholder="Enter transaction datetime" required readonly>
+                                            </div> 
+                                            <%}%>
+                                            <% if(title != 'Update order'){%>
+                                            <div class="mb-3 col-6">
+                                                <label for="status-f" class="form-label">paymentTransactionStatus</label>
+                                                <select class="form-select" id="status-ff" name="paymentTransactionStatus" data-choices data-choices-search-false>
+                                                    <option value="">Choose</option>
+                                                    <option value="success" <%=order.paymentTransactionStatus == "success" ? 'selected="selected"' : ''%>>successfull</option>
+                                                    <option value="unsuccess" <%=order.paymentTransactionStatus == "unsuccess" ? 'selected="selected"' : ''%>>Unsuccessfull</option>
+                                        
+                                                </select>
+                                            </div>
+                                            <%} else {%>
+                                                <div class="mb-3 col-6">
+                                                    <label for="status-f" class="form-label">paymentTransactionStatus</label>
+                                                    <select class="form-select" id="status-ff" name="paymentTransactionStatus" data-choices data-choices-search-false>
+                                                        <option value="">Choose</option>
+                                                        <option value="success" <%=order.paymentTransactionStatus == "success" ? 'selected="selected"' : ''%>>successfull</option>
+                                                        <option value="unsuccess" <%=order.paymentTransactionStatus == "unsuccess" ? 'selected="selected"' : ''%>>Unsuccessfull</option>
+                                            
+                                                    </select>
+                                                </div>
+                                                <%}%>
+                                                <!-- <% if(title != 'Update order'){%>
+                                           <div class="mb-3 col-6">
+                                                <label for="status-f" class="form-label">Status</label>
+                                                <select class="form-select" id="status-f" name="status" data-choices data-choices-search-false>
+                                                    <option value="">Choose</option>
+                                                    <option value="active" <%=order.status == "active" ? 'selected="selected"' : ''%>>Active</option>
+                                                    <option value="expired" <%=order.status == "expired" ? 'selected="selected"' : ''%>>Expired</option>
+                                                    <option value="cancelled" <%=order.status == "cancelled" ? 'selected="selected"' : ''%>>Cancelled</option>
+                                                    <option value="inqueue" <%=order.status == "inqueue" ? 'selected="selected"' : ''%>>InQueue</option>
+
+                                                </select>
+                                            </div>
+                                            <%} else {%>
+                                                <div class="mb-3 col-6">
+                                                    <label for="status-f" class="form-label">Status</label>
+                                                    <select class="form-select" id="status-f" name="status" data-choices data-choices-search-false>
+                                                        <option value="">Choose</option>
+                                                        <option value="active" <%=order.status == "active" ? 'selected="selected"' : ''%>>Active</option>
+                                                        <option value="expired" <%=order.status == "expired" ? 'selected="selected"' : ''%>>Expired</option>
+                                                        <option value="cancelled" <%=order.status == "cancelled" ? 'selected="selected"' : ''%>>Cancelled</option>
+                                                        <option value="inqueue" <%=order.status == "inqueue" ? 'selected="selected"' : ''%>>InQueue</option>
+    
+                                                    </select>
+                                                </div>
+                                                <%}%> -->
+
+                                            <div class="mb-3 col-6"></div>
+                                            <div class="mb-3 col-6">
+                                                <button type="button" class="btn btn-secondary w-sm" onclick="history.back()">Back</button>
+                                                <!-- <input type="hidden" name="id" id="id" value="<%=order.id%>"> -->
+                                                <button class="btn btn-primary" type="submit">
+                                                    <%= order !="" ? 'Update order' : 'Create order' %>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- end card -->
+
+
+
+                                <div class="card">
+                                    <!-- end card header -->
+
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                            </div>
+                            <!-- end col -->
+
+
+                            <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+
+
+            <!-- end card body -->
+            </div>
+            <!-- end card -->
+
+            </div>
+            <!-- end col -->
+            </div>
+            <!-- end row -->
+
+            </form>
+
+            </div>
+            <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> © Velzon.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Themesbrand
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            </div>
+            <!-- end main content-->
+            </div>
+            <!-- END layout-wrapper -->
+
+            <%- include("../../partials/footerlinks") %>
+                <%- include("../../partials/footer") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+    var subscriptionStartDateInput = document.getElementById('subscriptionStartDate');
+    var currentDate = new Date();
+    var formattedDate = currentDate.toISOString().split('T')[0];
+    subscriptionStartDateInput.value = formattedDate;
+ </script>
+
+<script>
+// function updateSubscriptionMonths() {
+//     var subscriptionMonthsInput = document.getElementById("subscriptionMonths");
+//     var subscriptionAmountInput = document.getElementById("amount");
+//     var subscriptionTaxInput = document.getElementById("tax");
+//     var discountInput = document.getElementById("discount");
+//     var totalInput = document.getElementById("total");
+
+    
+//     var selectedOption = document.getElementById("subscriptionId").options[document.getElementById("subscriptionId").selectedIndex];
+//     var selectedMonths = selectedOption.getAttribute("data-months");
+//     var selectedAmount = selectedOption.getAttribute("data-amounts");
+//     var selectedTax = selectedOption.getAttribute("data-tax");
+
+
+//     subscriptionMonthsInput.value = selectedMonths;
+//     subscriptionAmountInput.value = selectedAmount;
+//     subscriptionTaxInput.value = selectedTax;
+
+   
+//     if (selectedMonths && selectedAmount && selectedTax && discountInput.value !== "") {
+//         var amount = parseFloat(selectedAmount);
+//         var taxPercentage = parseFloat(selectedTax) / 100;
+//         var taxAmount = amount * taxPercentage;
+//          var discountValue = parseFloat(discountInput.value);
+//         // var discountPercentage = parseFloat(discountInput.value); 
+
+//       var total = amount + taxAmount - discountValue;
+//         totalInput.value = total.toFixed(2);
+
+//         // var discountAmount = (amount + taxAmount) * (discountPercentage / 100);
+        
+//         // var total = amount + taxAmount - discountAmount; 
+//         // totalInput.value = total.toFixed(2); 
+//     }else if(selectedMonths && selectedAmount && selectedTax !==""){
+//         var amount = parseFloat(selectedAmount);
+//         var taxPercentage = parseFloat(selectedTax) / 100;
+//         var taxAmount = amount * taxPercentage;
+//         //  var discountValue = parseFloat(discountInput.value);
+//         // var discountPercentage = parseFloat(discountInput.value); 
+
+//       var total = amount + taxAmount
+//         totalInput.value = total.toFixed(2);
+
+//         // var discountAmount = (amount + taxAmount) * (discountPercentage / 100);
+        
+//         // var total = amount + taxAmount - discountAmount; 
+//         // totalInput.value = total.toFixed(2);
+//     } else {
+//         totalInput.value = ""; 
+//     }
+// }
+
+
+// var discountInput = document.getElementById("discount");
+// discountInput.addEventListener("input", updateSubscriptionMonths);
+
+// updateSubscriptionMonths();
+</script>
+
+<script>
+    function filterContent() {
+        var selectedCustomerId = document.getElementById("customerId").value;
+        $.ajax({
+        url: "customerSubscription", 
+        type: "GET",
+        data: { selectedCustomerId: selectedCustomerId },
+        success: function (response) {
+            if(response?.formattedDate){
+                document.getElementById('subscriptionStartDate').value = response?.formattedDate
+            }else{
+                var currentDate = new Date();
+                var formattedDate = currentDate.toISOString().split('T')[0];
+                document.getElementById('subscriptionStartDate').value = formattedDate;
+            }
+            
+            console.log(response)
+        //   $("#category_id").empty();
+        //   $("#category_id").append("<option value=''>Select...</option>");
+        //   response.category.forEach(function (payeer) {
+        //     $("#category_id").append(`<option value='${payeer.id}' ${selectedId == payeer.id ? 'selected' : ''}>${payeer.name}</option>`);
+        //   });
+        },
+        error: function (e) {
+          console.log("ERROR:", e);
+        },
+      });
+    }
+</script> 
+
+<script>
+    $(document).ready(()=>{
+        $("#customerId").select2();
+        $('#amount').keyup(function(){
+            let amount = $(this).val();
+            let tax = $('#tax').val();
+            let discounts = $('#discount').val();
+            let discount = discounts!=undefined && discounts!=null && discounts!='' ? discounts : 0;
+            let taxTotal = (amount * tax) / 100;
+            let total = parseFloat(amount) + parseFloat(taxTotal) - parseFloat(discount);
+            $('#total').val(total)
+        });
+        $('#discount').keyup(function(){
+            let amount = $('#amount').val();
+            let tax = $('#tax').val();
+            let discounts = $(this).val();
+            let discount = discounts!=undefined && discounts!=null && discounts!='' ? discounts : 0;
+            let taxTotal = (amount * tax) / 100;
+            let total = parseFloat(amount) + parseFloat(taxTotal) - parseFloat(discount);
+            $('#total').val(total)
+        });
+        $('#subscriptionId').change(function(){
+            let dataAmount = $(this).find(':selected').data('amounts');
+            let dataTax = $(this).find(':selected').data('tax');
+            let dataMonth = $(this).find(':selected').data('months');
+            $('#subscriptionMonths').val(dataMonth);
+            $('#amount').val(dataAmount);
+            $('#tax').val(dataTax);
+            let amount = dataAmount;
+            let tax = dataTax;
+            let discounts = $('#discount').val();
+            let discount = discounts!=undefined && discounts!=null && discounts!='' ? discounts : 0;
+            let taxTotal = (amount * tax) / 100;
+            let total = parseFloat(amount) + parseFloat(taxTotal) - parseFloat(discount);
+            $('#total').val(total)
+        });
+    })
+</script>
+
+
+
+
+                   

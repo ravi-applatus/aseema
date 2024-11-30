@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Projects\\Personal\\realtimeoi\\API\\logs\\.fdd711d1df8d0f890754ce160b64dab71e621805-audit.json",
+    "files": [
+        {
+            "date": 1688984631666,
+            "name": "D:\\Projects\\Personal\\realtimeoi\\API\\logs\\nodejs-guide-2023-07-10.log",
+            "hash": "e2809f4941474b5a17d7298c7b418b312efa87239a54c5377258840ed4b7e1b9"
+        }
+    ],
+    "hashType": "sha256"
+}

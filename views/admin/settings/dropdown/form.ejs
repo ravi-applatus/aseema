@@ -1,0 +1,251 @@
+<%- include("../../../partials/headerlinks") %>
+<%- include("../../../partials/header") %>
+<%- include("../../../partials/sidebar") %>
+<style>
+    .panel_body{ padding:15px 20px;}
+.panel_title{ padding-bottom:30px; position: relative;}
+.panel_title h3{ font-size:20px; color:#485668; font-weight:500; padding-bottom:7px;}
+.panel_btn{ position: absolute; right: 0;    margin-right: 110px; line-height: 33px; cursor: pointer; padding: 0px 20px; background: #ffc000; font-size: 12px; text-transform: uppercase; font-weight: 500; color: #fff; border: 0; border-radius: 4px;}
+.panel_btn:hover{ background: #607188; color: #fff;}
+.submit_btn{ display:inline-block; line-height:40px; cursor:pointer; padding:0px 25px; background:#ffc000; font-size:14px; text-transform:uppercase; font-weight:500; color:#fff; border:0; border-radius:4px;}
+.remove_close{
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+    /* padding: 15px 15px; */
+    padding: 0px 10px;
+}
+.remove_close i{
+    font-size: 22px;
+}
+
+</style>
+
+<!-- Vertical Overlay-->
+<div class="vertical-overlay"></div>
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+ <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Dropdown Settings</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                        <li class="breadcrumb-item active">Dropdown Settings</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <form class="row g-3 needs-validation" method="post" action="/admin/settings/dropdown-settings/form" novalidate enctype="multipart/form-data" >
+                    <!-- <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate> -->
+                        <!-- <form class="row g-3 needs-validation" method="post" action="" novalidate enctype="multipart/form-data"></form> -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                   
+                                    <div class="card-body row">
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label" for="title-input">Title</label>
+                                                <input type="text" class="form-control" id="product-title-input" value="<%= arrData.name || '' %>" name="name" placeholder="Enter title" required>
+                                                <div class="invalid-feedback">Please enter a title.</div>
+                                            </div>
+
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label" for="slug-input">Slug</label>
+                                                <input type="text" class="form-control" id="slug-input" name="slug" value="<%= arrData.slug || '' %>" placeholder="Enter slug" required>
+                                                <div class="invalid-feedback">Please enter a slug.</div>
+                                            </div>
+                                            
+                                            <div class="col-md-4 mb-3">
+                                                <label for="choices-publish-status-input" class="form-label">Status</label>
+                                                <select class="form-select" name="status" id="choices-publish-status-input" data-choices data-choices-search-false>
+                                                    <option value="Yes" <%= arrData.status === 'Yes' ? 'selected' : '' %>>Active</option>
+                                                    <option value="No" <%= arrData.status === 'No' ? 'selected' : '' %>>Inactive</option>
+                                                </select>
+                                            </div>
+                                    </div>
+
+                                </div>
+                                
+
+                                <div class="card">                                   
+                                    <!-- end card header -->
+                                    <div class="content_body panel_body">
+                                        <div class="panel_title">
+                                            <h3>Dropdown Option</h3>
+                                          
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="control-label" for="optionLabel">Option Label<span class="required"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label" for="optionValue">Option Value<span class="required"></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label" for="optionOrder">Option Order<span class="required"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <% if (arrOption.length > 0) { %>
+                                            <% arrOption.forEach(function(val) { %> 
+                                            <div class="row clone" style="margin-bottom: 15px;">        
+                                                <div class="col-sm-3">
+                                                    <input    type="text" id="optionLabel" name="optionLabel" value="<%= val.optionLabel %>" class="form-control" >
+                                                </div>              
+                                                <div class="col-sm-3">
+                                                    <input type="text"  id="optionValue" name="optionValue" value="<%= val.optionValue %>" class="form-control" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="text"  id="optionOrder" name="optionOrder" value="<%= val.optionOrder %>" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="option_add">
+                                                        <button class="remove_trigger btn btn-danger remove_close" type="button"><i class="ri-close-line"></i></button>
+                                                        <button class="clone_trigger panel_btn" type="button"><i class="ri-add-line"></i> Add</button>
+                                                    </div>
+                                                </div> 
+                                                <input type="hidden" name="H_option_row_id" value="<%= val.id %>" class="form-control H_option_row_id" >                             
+                                            </div>
+                                            <% })
+                                        }else{%>
+                                            <div class="row clone" style="margin-bottom: 15px;">        
+                                                <div class="col-sm-3">
+                                                    <input type="text" id="optionLabel" name="optionLabel" value="" class="form-control" >
+                                                </div>              
+                                                <div class="col-sm-3">
+                                                    <input type="text"  id="optionValue" name="optionValue" value="" class="form-control" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="text"  id="optionOrder" name="optionOrder" value="" class="form-control" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="option_add">
+                                                        <button class="remove_trigger btn btn-danger remove_close" type="button"><i class="ri-close-line"></i></button>
+                                                        <button class="clone_trigger panel_btn" type="button"><i class="ri-add-line"></i> Add</button>
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                        
+                                            <% } %>
+                                        <div class="placer"></div>
+                                        <div class="btn_right mb-4"> 
+                                            <input type="hidden" name="id" value="<%= arrData ? arrData.id : '' %>">
+                                            <button id="send" type="submit" class="submit_btn">Submit</button>
+                                        </div>
+                                    </div>
+                                   
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->                               
+                            </div>
+                            <!-- end col -->
+
+                            
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                                    </div>
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+
+                    
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </form>
+
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © Velzon.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Themesbrand
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+<!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+<%- include("../../../partials/footerlinks") %>
+<%- include("../../../partials/footer") %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $(".clone_trigger").click(function () {
+          $('.clone').first().clone().find("input:text").val("").end().insertBefore(".placer");
+          $('input.cl:last').val('');
+          $('.H_option_row_id:last').val('');
+        event.preventDefault();
+      });     
+      $(document).on('click','.remove_trigger',function () {     
+          if ($(".clone").length > 0) {        
+              if($(".clone").length == 1){
+                  $(".clone:last")
+                  .find("input:text").val("").end()     
+              }else{
+                  $(this).closest('.clone').remove();
+              }                         
+          }
+          event.preventDefault();
+      });       
+  });
+  </script>
+  <script>
+      $('#slug').attr('readonly', true);
+      /*$("#name").keyup(function(){
+      $("#slug").val($(this).val().replace(/\s+/g, '-').toLowerCase());
+  });*/
+  
+      $("#name").keyup(function () {
+          var randomNumber = Math.floor(1000 + Math.random() * 9000);
+          var storeId = $('#storeId').val();
+          var name = $('#name').val();
+          var slug = name.toString().toLowerCase().replace(/\s+/g, '-');
+          slug += storeId + "-" + randomNumber;
+          $('#slug').val(slug);
+      });
+      $('#storeId').change(function () {
+          var randomNumber = Math.floor(1000 + Math.random() * 9000);
+          var storeId = $('#storeId').val();
+          var name = $('#name').val();
+          var slug = name.toString().toLowerCase().replace(/\s+/g, '-');
+          slug += storeId + "-" + randomNumber;
+          $('#slug').val(slug);
+      });
+  </script>

@@ -1,0 +1,533 @@
+<%- include("../../../partials/headerlinks") %>
+    <%- include("../../../partials/header") %>
+        <%- include("../../../partials/sidebar") %>
+
+            <!-- Vertical Overlay-->
+            <div class="vertical-overlay"></div>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">Subscriptions</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a>
+                                            </li>
+                                            <li class="breadcrumb-item active">Subscriptions</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card" id="subscriptionlist">
+                                    <div class="card-header border-bottom-dashed">
+
+                                        <div class="row g-4 align-items-center">
+                                            <div class="col-sm">
+                                                <div>
+                                                    <h5 class="card-title mb-0">Subscription Plans</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-auto">
+                                                <div>
+                                                    <button type="button" class="btn btn-success add-btn"
+                                                        data-bs-toggle="modal" id="create-btn"
+                                                        data-bs-target="#showModal"><i
+                                                            class="ri-add-line align-bottom me-1"></i> Add Subscription
+                                                        plan</button>
+                                                    <!-- <button type="button" class="btn btn-info"><i class="ri-file-download-line align-bottom me-1"></i> Import</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="row">
+                                <div class="card-body col-md-3">
+
+                                    <div class="table-responsive table-card mb-1">
+                                        <table class="table align-middle" id="customerTable">
+                                            <thead class="table-light text-muted">
+                                                <tr>
+                                                    <th scope="col" style="width: 50px;">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="checkAll" value="option">
+                                                        </div>
+                                                    </th>
+
+                                                    <th class="sort" data-sort="title">title</th>
+                                                    <!-- <th class="sort" data-sort="fees">fees</th>
+                                                        <th class="sort" data-sort="duration">duration</th>
+                                                        <th class="sort" data-sort="tax">Tax</th>
+                                                        <th class="sort" data-sort="noOfMonths">Months</th>
+                                                        <th class="sort" data-sort="status">Status</th>
+                                                        <th class="sort" data-sort="days">Days</th>
+                                                        <th class="sort" data-sort="status">Status</th>  -->
+                                                    <th class="sort" data-sort="action">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="list form-check-all">
+                                                <% subscriptionList.forEach(function(s){%>
+                                                    <tr class="edit_icon_id_<%=s.id%>">
+                                                        <th scope="row">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="chk_child" value="option1">
+                                                            </div>
+                                                        </th>
+                                                        <td class="tittle" id="<%= s.id %>"
+                                                            onclick="optionslist('<%= s.id %>')" name="Drop"
+                                                            value="<%= s.id %>">
+                                                            <%=s.title%>
+                                                        </td>
+
+                                                        <!-- <td><span class="badge <%=s.status=='y' ? 'badge-soft-success':'badge-soft-danger'%> text-uppercase'%>"><%=s.status=='y' ? "Enabled":"Disabled"%></span> -->
+                                                        </td>
+                                                        <td>
+                                                            <ul class="list-inline hstack gap-2 mb-0">
+                                                                <li class="list-inline-item edit"
+                                                                    data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                                    data-bs-placement="top" title="Edit">
+                                                                    <a href="#showModal" data-bs-toggle="modal"
+                                                                        class="text-primary d-inline-block edit-item-btn">
+                                                                        <i class="ri-pencil-fill fs-16 edit-icon"
+                                                                            id="edit_icon_id_<%=s.id%>"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="list-inline-item" data-bs-toggle="tooltip"
+                                                                    data-bs-trigger="hover" data-bs-placement="top"
+                                                                    title="Remove">
+                                                                    <a class="text-danger d-inline-block remove-item-btn"
+                                                                        data-bs-toggle="modal"
+                                                                        href="#deleteRecordModal">
+                                                                        <i class="ri-delete-bin-5-fill fs-16 delete-icon"
+                                                                            id="<%=s.id%>"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                        <input type="hidden" id="H_id" value="<%=s.id%>">
+                                                        <input type="hidden" id="H_title" value="<%=s.title%>">
+                                                        <input type="hidden" id="H_tag" value="<%=s.tag%>">
+                                                        <input type="hidden" id="H_description"
+                                                            value="<%=s.description%>">
+                                                        <input type="hidden" id="H_fees" value="<%=s.fees%>">
+                                                        <input type="hidden" id="H_tax" value="<%=s.tax%>">
+                                                        <input type="hidden" id="H_duration" value="<%=s.duration%>">
+                                                        <input type="hidden" id="H_noOfMonths"
+                                                            value="<%=s.noOfMonths%>">
+                                                        <input type="hidden" id="H_status" value="<%=s.status%>">
+                                                    </tr>
+                                                    <% })%>
+                                            </tbody>
+                                        </table>
+                                        <div class="noresult" style="display: none">
+                                            <div class="text-center">
+                                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                                    colors="primary:#121331,secondary:#08a88a"
+                                                    style="width:75px;height:75px"></lord-icon>
+                                                <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                <p class="text-muted mb-0">We've searched more than 150+
+                                                    customer We did not find any customer for you search.</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-light p-3">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add
+                                                        Subscription Plan</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close" id="close-modal"></button>
+                                                </div>
+                                                <form id="form_subscription" class="needs-validation" method="post"
+                                                    action="" novalidate>
+                                                    <div class="modal-body">
+                                                        <input type="hidden" id="id" name="id" />
+
+                                                        <div class="mb-3">
+                                                            <label for="title" class="form-label">Title <span
+                                                                    class="requiredField">*</span></label>
+                                                            <input type="text" id="title" class="form-control"
+                                                                name="title" placeholder="Enter title" required />
+                                                            <div class="invalid-feedback">This field is
+                                                                required!</div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="tag" class="form-label">Tag</label>
+                                                            <input type="text" id="tag" class="form-control" name="tag"
+                                                                placeholder="Enter tag" required />
+                                                            <div class="invalid-feedback">This field is
+                                                                required!</div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="description" class="form-label">Description
+                                                            </label>
+                                                            <textarea name="description" id="description" cols="70"
+                                                                rows="03"></textarea>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="fees" class="form-label">Fees <span
+                                                                    class="requiredField">*</span></label>
+                                                            <input type="number" id="fees" class="form-control"
+                                                                name="fees" placeholder="Enter Fees" required />
+                                                            <div class="invalid-feedback">This field is
+                                                                required!</div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="tax" class="form-label">Tax <span
+                                                                    class="requiredField">*</span></label>
+                                                            <div class="input-group">
+                                                                <input type="number" id="tax" class="form-control"
+                                                                    name="tax" placeholder="Enter Tax" required />
+                                                                <span class="input-group-text">%</span>
+                                                            </div>
+                                                            <div class="invalid-feedback">This field is
+                                                                required!</div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="duration" class="form-label">Duration
+                                                                <span class="requiredField">*</span></label>
+                                                            <select class="form-select" name="duration" id="duration"
+                                                                required>
+                                                                <option value="">Choose</option>
+                                                                <option value="Monthly">Monthly</option>
+                                                                <option value="Quarterly">Quarterly</option>
+                                                                <option value="Half-Yearly">Half-Yearly</option>
+                                                                <option value="Yearly">Yearly</option>
+                                                            </select>
+                                                            <div class="invalid-feedback">This field is
+                                                                required!</div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="fees" class="form-label">Months<span
+                                                                    class="requiredField">*</span></label>
+                                                            <input type="number" id="noOfMonths" class="form-control"
+                                                                name="noOfMonths" placeholder="Enter Months" required />
+                                                            <div class="invalid-feedback">This field is
+                                                                required!</div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="status-f" class="form-label">Status
+                                                                <span class="requiredField">*</span></label>
+                                                            <select class="form-select" name="status" id="status-f"
+                                                                required>
+                                                                <option value="">Choose</option>
+                                                                <option value="y">Enable</option>
+                                                                <option value="n">Disable</option>
+                                                            </select>
+                                                            <div class="invalid-feedback">This field is
+                                                                required!</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="hstack gap-2 justify-content-end">
+                                                            <button type="button" class="btn btn-light"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <!-- <button type="submit" class="btn btn-success" id="add-btn">Add Subscription plan</button> -->
+                                                            <button type="submit" class="btn btn-success"
+                                                                id="edit-btn">Add Subscription</button>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close" id="btn-close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mt-2 text-center">
+                                                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json"
+                                                            trigger="loop" colors="primary:#f7b84b,secondary:#f06548"
+                                                            style="width:100px;height:100px"></lord-icon>
+                                                        <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                                                            <h4>Are you sure ?</h4>
+                                                            <p class="text-muted mx-4 mb-0">Are you sure you
+                                                                want to remove this record ?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                        <button type="button" class="btn w-sm btn-light"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn w-sm btn-danger"
+                                                            id="delete-record">Yes, Delete It!</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end modal -->
+
+
+                                </div>
+
+                                <div class="card col-md-9">
+                                    <table id="customers">
+                                        <thead class="BC_G">
+                                            <tr></tr>
+                                            <div class="row ">
+                                                <th>
+                                                    <div class="col-sm-3 max_width">
+                                                        <label class="control-label" for="fees">Fees
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="col-sm-3 max_width">
+                                                        <label class="control-label"
+                                                            for="description">Description</label>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="col-sm-3 max_width">
+                                                        <label class="control-label" for="duration">Duration
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="col-sm-3 max_width">
+                                                        <label class="control-label" for="status">Status
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                            </div>
+                                            </tr>
+                                        </thead>
+                                        <tbody name="xyz" id="xyz">
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+                        </div>
+                        <!--end col-->
+
+                        <!--end row-->
+
+
+                        <!-- container-fluid -->
+                    </div>
+                    <!-- End Page-content -->
+
+                    <footer class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script> © Velzon.
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-sm-end d-none d-sm-block">
+                                        Design & Develop by Themesbrand
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+                <!-- end main content-->
+            </div>
+            <!-- END layout-wrapper -->
+
+            <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="//cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.editorConfig = function (config) {
+              // Customize CKEditor configuration options
+              config.language = 'es'; // Set the language to Spanish
+              config.uiColor = '#F7B42C'; // Set the UI color to a specific value
+              config.height = 300; // Set the editor height to 300 pixels
+              config.toolbarCanCollapse = true; // Enable toolbar collapsing
+            };
+           
+            // Replace the textarea with CKEditor
+            var editor = CKEDITOR.replace('description');
+          
+            // Remove HTML tags from the editor content
+            function removeHtmlTags() {
+              var content = editor.getData(); // Get the content from the editor
+              var sanitizedContent = content.replace(/(<([^>]+)>)/gi, ''); // Remove all HTML tags from the content
+              editor.setData(sanitizedContent); // Set the sanitized content back to the editor
+            }
+          </script> -->
+            <%- include("../../../partials/footerlinks") %>
+                <%- include("../../../partials/footer") %>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+                        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $("#form_subscription").submit(function (e) {
+                                e.preventDefault();
+                                var form = $(this); // You need to use standard javascript object here
+                                //var formData = new FormData(form);
+                                $.ajax({
+                                    type: "POST",
+                                    url: "<%=baseurl%>admin/settings/subscription/form",
+                                    data: form.serialize(),
+                                    dataType: "json",
+                                    success: function (resp) {
+                                        resp = JSON.parse(JSON.stringify(resp));
+                                        if (resp.success) {
+                                            Swal.fire(
+                                                resp.data.message,
+                                                '',
+                                                'success',
+                                            ).then(function () {
+                                                location.reload();
+                                            })
+                                        }
+                                    },
+                                    error: function (error) {
+                                        console.log(error);
+                                        if (error.success) {
+                                            Swal.fire(
+                                                error.data.message,
+                                                '',
+                                                'error',
+                                            )
+                                        }
+                                    }
+                                });
+                            });
+
+
+                            $("#create-btn").click(function () {
+                                $("#exampleModalLabel").html("Add Subscription Plan");
+                                $("#edit-btn").html("Add Subscription");
+                            })
+
+
+                            $(".edit-icon").click(function () {
+                                $("#edit-btn").html("Update Subscription");
+                                const cls = $(this).attr("id");
+                                $(".modal #id").val($("." + cls + " #H_id").val());
+                                $(".modal #title").val($("." + cls + " #H_title").val());
+                                $(".modal #tag").val($("." + cls + " #H_tag").val());
+                                $(".modal #description").val($("." + cls + " #H_description").val());
+                                $(".modal #fees").val($("." + cls + " #H_fees").val());
+                                $(".modal #tax").val($("." + cls + " #H_tax").val());
+                                $(".modal #duration").val($("." + cls + " #H_duration").val());
+                                $(".modal #noOfMonths").val($("." + cls + " #H_noOfMonths").val());
+                                $(".modal #status-f").val($("." + cls + " #H_status").val());
+                                $("#exampleModalLabel").html("Update Subscription Plan");
+                            });
+
+                            var delete_id = null;
+                            $(".delete-icon").click(function () {
+                                delete_id = $(this).attr('id');
+                            });
+
+
+                            $("#delete-record").click(function () {
+                                if (delete_id > 0) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "<%=baseurl%>admin/settings/subscription/delete",
+                                        data: {
+                                            "id": delete_id
+                                        },
+                                        dataType: "json",
+                                        success: function (resp) {
+                                            resp = JSON.parse(JSON.stringify(resp));
+                                            if (resp.success) {
+                                                Swal.fire(
+                                                    resp.message,
+                                                    '',
+                                                    'success',
+                                                ).then(function () {
+                                                    location.reload();
+                                                })
+                                            }
+                                        },
+                                        error: function (error) {
+                                            console.log(error);
+                                            if (error.success) {
+                                                Swal.fire(
+                                                    error.message,
+                                                    '',
+                                                    'error',
+                                                )
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    </script>
+
+
+                    <script>
+                        function optionslist(val) {
+                            // const selectedOption = $('input[name="Drop"]:checked').map(function () {
+                            //     return $(this).val();
+                            // }).get();
+                            // alert(val);
+                            // alert(selectedOption);
+                            $.ajax({
+                                url: "<%= adminbaseurl %>settings/subscription/details",
+                                type: "GET",
+                                data: { subscriptionId: val },
+                                success: function (response) {
+                                    $("#xyz").empty();
+                                    response.subscription.forEach(function (dropdown) {
+                                        $("#xyz").append(
+                                            `<tr>
+                        <td>${dropdown.fees}</td>
+                        <td>${dropdown.description}</td>
+                        <td>${dropdown.duration}</td>
+                        <td>${dropdown.status == 'y' ? "Enabled" : "Disabled"}</td>
+                    </tr>`);
+                                    });
+                                },
+                                error: function (e) {
+                                    console.log("ERROR:", e);
+                                },
+                            });
+                        }
+
+                    </script>

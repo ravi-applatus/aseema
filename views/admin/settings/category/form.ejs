@@ -1,0 +1,319 @@
+<%- include("../../../partials/headerlinks") %>
+    <%- include("../../../partials/header") %>
+        <%- include("../../../partials/sidebar") %>
+            <style>
+                .dropzone_item {
+                    height: 50px;
+                    padding: unset;
+                    min-height: 130px;
+                }
+                
+                .needsclick {
+                    margin: unset !important;
+                    font-size: unset !important;
+                }
+                
+                .needsclick h4 {
+                    font-size: 12px;
+                }
+                
+                .dropzone_img {
+                    min-height: 130px;
+                    padding: 0.3rem!important;
+                }
+                
+                .avatar_img {
+                    width: unset;
+                    position: relative;
+                }
+                
+                .avatar_img button {
+                    position: absolute;
+                    top: -15%;
+                    left: 90px;
+                    font-size: 22px;
+                    background-color: unset;
+                    border: unset;
+                }
+                
+                .up_pic {
+                    position: relative;
+                    padding: 5px 5px;
+                }
+                
+                .up_pic img {
+                    /* width: 100%;
+                    max-height: 122px;
+                    height: 122px; */
+                    width: 170px;
+                    height: 125px;
+                    object-fit: contain;
+                    background-position: center;
+                }
+                
+                .up_pic button {
+                    /* position: absolute;
+                    top: 0%;
+                    left: 95px;
+                    font-size: 22px;
+                    background-color: unset;
+                    border: unset;
+                    color: #fff; */
+                    position: absolute;
+                    top: 4%;
+                    left: 154px;
+                    font-size: 17px;
+                    background-color: unset;
+                    border: unset;
+                    color: #fff;
+                    background-color: black;
+                    padding: 0px 5px;
+                    border-radius: 50px;
+                    width: 25px;
+                    height: 25px;
+                }
+                
+                .up_pic button:hover {
+                    color: #fff;
+                    background-color: black;
+                }
+                
+                .upload_img_box {
+                    width: 35%;
+                }
+                
+                .avatar_img button:hover {
+                    background-color: unset;
+                    border: unset;
+                }
+                
+                .up_box {
+                    border: 1px solid rgba(0, 0, 0, .8);
+                    border-radius: 5px;
+                    min-height: 130px;
+                    text-align: center;
+                }
+                
+                .up_box i {
+                    font-size: 65px;
+                    color: #878a99;
+                }
+                
+                .up_img_box {
+                    border: 1px solid var(--vz-border-color);
+                    /* width: 38%; */
+                    /* height: 135px; */
+                    /* width: 23%; */
+                    height: 165px;
+                    border-radius: 5px;
+                    display: inline-flex;
+                }
+                
+                .up_pic img {
+                    border-radius: 0.25rem;
+                }
+                
+                .up_pic h5 {
+                    padding-top: 10px;
+                    font-size: 14px;
+                    text-align: center;
+                    width: 165px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+                
+                .up_img_text {
+                    padding: 7px 10px;
+                }
+                
+                .up_img_text h5 {
+                    font-size: 15px;
+                    margin-bottom: 5px;
+                }
+                
+                .up_img_text p {
+                    color: #878a99;
+                }
+
+                #prv_file_name {
+                    cursor: pointer;
+                }
+            </style>
+            <!-- Vertical Overlay-->
+            <div class="vertical-overlay"></div>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0"><%=category.id>0 ? 'Update Category' : 'Create Category'%></h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                            <li class="breadcrumb-item active">Categories</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <form id="createbanner-form" autocomplete="off" class="needs-validation" method="post" action="" novalidate enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card ">
+                                        <div class="card-body row">
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="name">Name<span class="requiredField">*</span></label>
+                                                        <input type="text" class="form-control" id="name" name="name" value="<%=category.name%>" placeholder="Enter name" required>
+                                                          <div class="invalid-feedback">Please Enter a name.</div> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                        <div class="mb-3">
+                                                                <label for="type" class="form-label">Type</label>
+                                                                <select class="form-select" name="type" id="type" required>
+                                                                <!-- <option value="">Choose</option> -->
+                                                                 <option value="article" <%= category.type == 'article' ? "selected='selected'" : ''%>>Article</option>
+                                                                <!-- <option value="emagazine" <%= category.type == 'emagazine' ? "selected='selected'" : ''%>>Emagazine</option>
+                                                                <option value="news" <%= category.type == 'news' ? "selected='selected'" : ''%>>News</option> -->
+
+                                                            </select>
+                                                                <div class="invalid-feedback">This field is required!</div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label for="choices-publish-status-input" class="form-label">Status<span class="requiredField">*</span></label>
+                                                        <select class="form-select" id="choices-publish-status-input" name="status" required>
+                                                            <option value="">Choose</option>
+                                                            <option value="active" <%= category.status == 'active' ? "selected='selected'" : ''%>>Active</option>
+                                                            <option value="inactive" <%= category.status == 'inactive' ? "selected='selected'" : ''%>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                               
+                                              
+                                            </div>
+                                             <div class="row">
+                                                            <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4 class="card-title mb-0">Image</h4>
+                                                                    </div>
+                                                                    <div class="card-body row">
+                                                                        <div class="up_box col-md-6" id="openFileDialog">
+                                                                            <i class="ri-upload-cloud-2-fill"></i>
+                                                                            <p>click here to upload</p>
+                                                                            <input type="file" name="image" id="image" class="d-none" value="" accept="image/*">
+                                                                        </div>
+                                                                        <div class="col-md-6 prv-div <%=category.image != '' && category.image != null ? '': 'd-none'%>">
+                                                                            <div class="up_img_box">
+                                                                                <div class="up_pic">
+                                                                                    <img id="prv_img" src="<%=baseurl%>admin/category/<%=category.image %>" alt="" id="">
+                                                                                    <h5 id="prv_file_name" alt="<%=category.image %>"<%=category.image %>"></h5>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                 <div class="text-end mb-3">
+                                                                 <input type="hidden" name="id" id="id" value="<%=category.id%>">
+                                                                <button type="submit" class="btn btn-success w-sm" id="create-bttn"><%=category.id > 0 ? 'Update': 'Submit' %></button>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+
+                           
+                    </div>
+                    <!-- end col -->
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                </form>
+
+            </div>
+            <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> © Velzon.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Themesbrand
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            </div>
+
+            </div>
+            <!-- END layout-wrapper -->
+
+
+            <%- include("../../../partials/footerlinks") %>
+                <%- include("../../../partials/footer") %>
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+
+                            //Open file dialog browser 
+                            $("#openFileDialog").click(function(e) {
+                                $("#image")[0].click();
+                            });
+
+
+
+                            $("#image").change(function() {
+                                let fileInput = document.getElementById("image");
+                                let file = fileInput.files[0];
+                                console.log(file);
+                                if (file) {
+                                    let fileType = file.type;
+                                    let validExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
+                                    if (validExtensions.includes(fileType)) {
+                                        let reader = new FileReader();
+                                        reader.onload = (e) => {
+                                            var output = document.getElementById('prv_img');
+                                            output.src = e.target.result;
+                                            $(".prv-div").removeClass("d-none");
+                                            $("#prv_file_name").html(file.name);
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }
+                            });
+                        });                        
+                 </script>
+ 

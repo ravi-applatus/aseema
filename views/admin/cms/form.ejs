@@ -1,0 +1,151 @@
+<%- include("../../partials/headerlinks") %>
+    <%- include("../../partials/header") %>
+        <%- include("../../partials/sidebar") %>
+
+            <!-- Vertical Overlay-->
+            <div class="vertical-overlay"></div>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">
+                                        <%=cmsdata.id>0 ? 'Update Cms' : 'Create Cms'%>
+                                    </h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                            <li class="breadcrumb-item active">Create Cms</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <form id="createcmsr-form" class="needs-validation" method="post" action="/admin/cms/form" novalidate enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card ">
+                                        <div class="card-body row">
+                                            <div class="mb-3" style="display: none">
+                                                <input type="hidden" class="form-control" id="updateId" name="updateId" value="<%=cmsdata.id || '' %>" required>
+                                            </div>
+                                            <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Title</label>
+                                                <input type="text" class="form-control" id="title" name="title" value="<%=cmsdata.title%>" placeholder="Enter title" required>
+                                            </div>
+
+                                            <!-- <div class="mb-3 col-6">
+                                                <label class="form-label" for="title">Slug</label>
+                                                <input type="text" class="form-control" id="slug" name="slug" value="<%=cmsdata.slug%>" placeholder="Enter slug" required>
+                                            </div> -->
+
+                                            <div class="mb-3 col-6">
+
+                                                <label class="form-label" for="content-f">Content</label>
+                                                <textarea class="form-control ckeditor-classic" id="short_description" name="short_description" placeholder="Enter content"><%=cmsdata.short_description%></textarea>
+                                                <!-- <div class="ckeditor-classic"></div> -->
+
+                                            </div>
+
+
+
+                                            <div class="mb-3 col-6">
+                                                <label for="choices-publish-status-input" class="form-label">Status</label>
+
+                                                <select class="form-select" id="choices-publish-status-input" name="status" data-choices data-choices-search-false>
+                                                <option value="">Choose</option>
+                                                 <option value="enable" <%= cmsdata.status == 'enable' ? "selected='selected'" : ''%>>Enable</option>
+                                                 <option value="disable" <%= cmsdata.status == 'disable' ? "selected='selected'" : ''%>>Disable</option>
+                                            </select>
+
+                                            </div>
+
+                                            <div class="text-end mb-3 col-12 ">
+                                                <button type="submit" class="btn btn-success w-sm">Submit</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- end card -->
+
+
+
+                                <div class="card">
+                                    <!-- end card header -->
+
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                            </div>
+                            <!-- end col -->
+
+
+                            <!-- end card body -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+
+
+            <!-- end card body -->
+            </div>
+            <!-- end card -->
+
+            </div>
+            <!-- end col -->
+            </div>
+            <!-- end row -->
+
+            </form>
+
+            </div>
+            <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> © Velzon.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Themesbrand
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            </div>
+            <!-- end main content-->
+            </div>
+            <!-- END layout-wrapper -->
+
+            <%- include("../../partials/footerlinks") %>
+                <%- include("../../partials/footer") %>
+                    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#short_description'))
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script> -->

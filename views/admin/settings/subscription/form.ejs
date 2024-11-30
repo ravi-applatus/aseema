@@ -1,0 +1,130 @@
+<%- include("../../../partials/headerlinks") %>
+<%- include("../../../partials/header") %>
+<%- include("../../../partials/sidebar") %>
+
+<!-- Vertical Overlay-->
+<div class="vertical-overlay"></div>
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+ <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Create Subscriptions</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                        <li class="breadcrumb-item active">Subscriptions</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="title-input">Fees</label>
+                                            <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">
+                                            <input type="number" class="form-control d-none" id="product-id-input">
+                                            <input type="number" class="form-control" id="product-title-input" value="" placeholder="Enter Fees" required>
+                                            <div class="invalid-feedback">Please Enter a title.</div>
+                                        </div>
+
+                                <div class="mb-3">
+                                            <label class="form-label" for="valid-input">Valid_upto</label>
+                                            <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">
+                                            <input type="date" class="form-control d-none" id="product-id-input">
+                                            <input type="date" class="form-control" id="slug-input" value="" placeholder="Enter date" required>
+                                            <div class="invalid-feedback">Please Enter a date.</div>
+                                        </div>
+                                                                              
+                                    </div>
+                                </div>
+
+                                <div class="card">                                   
+
+                                </div>
+                                <!-- end card -->                               
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Publish</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="choices-publish-status-input" class="form-label">Status</label>
+
+                                            <select class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
+                                                <option value="y" selected>Y</option>
+                                                <option value="n">N</option>
+                                                 <option value="n">B</option>
+                                            </select>
+                                        </div>
+                        </div>
+                    </div>
+
+                                    </div>
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                                    </div>
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+
+                    
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                    </form>
+
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © Velzon.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Themesbrand
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+<!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+<%- include("../../../partials/footerlinks") %>
+<%- include("../../../partials/footer") %>

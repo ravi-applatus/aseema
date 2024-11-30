@@ -1,0 +1,55 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/.9171a0ebf07ffe47c2a73987e6824299d18b86ec-audit.json",
+    "files": [
+        {
+            "date": 1696829845687,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-09.log",
+            "hash": "c99d15fb39963732b9f6a0aff7ffa52504dcb5adfcd4bda483444eaaf3101418"
+        },
+        {
+            "date": 1696925472607,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-10.log",
+            "hash": "7736e4d55c9b4280b4e1e09bfdda56a18a011a4769af1e007293e0221cf4de03"
+        },
+        {
+            "date": 1697095214734,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-12.log",
+            "hash": "73c6c5a163f54eca26156fe61b0c4c56824c3c6b6edd1c9bc494c5aec1c4074d"
+        },
+        {
+            "date": 1697180718212,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-13.log",
+            "hash": "2d989caa9450211c6dd74c016ee1e895822be3ede0a1c2850ce58818a6aa3861"
+        },
+        {
+            "date": 1697431120171,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-16.log",
+            "hash": "9aab68234abf97889021b4123f44e74a2854923b341e23f4735f076b69ed6ea7"
+        },
+        {
+            "date": 1697524467672,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-17.log",
+            "hash": "cdbbe46a3bb665d4a21a23740bd82af2ea9750f410a9f2b4a97498a43bba46b0"
+        },
+        {
+            "date": 1697608002675,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-18.log",
+            "hash": "1909436c5ce04110b7824d70da3e75820b10180faf4713d1c4737cbe3cb55f42"
+        },
+        {
+            "date": 1697711088885,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-19.log",
+            "hash": "fd7fc47f9d0a66fbad5b603a25fc26a6b38a49069cf9c70fa8dc841cb72d21ee"
+        },
+        {
+            "date": 1697786364063,
+            "name": "/var/www/html/public_html/aseema.tezcommerce.com/backend/logs/nodejs-guide-2023-10-20.log",
+            "hash": "170c3c12d11dce991e3b2feee717c68516736dd2f1f7570881469d5b2f70bb73"
+        }
+    ],
+    "hashType": "sha256"
+}

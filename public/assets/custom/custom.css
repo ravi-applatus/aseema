@@ -1,0 +1,44 @@
+.requiredField {
+    color: red;
+}
+
+.max_width {
+    width: 50% !important;
+}
+
+.max_width label {
+    font-size: 16px;
+}
+
+#customers td,
+#customers th {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}
+
+.BC_G tr {
+    background-color: #f6f8fa !important;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.d_n {
+    display: none;
+}
+
+#cms_right thead {
+    background-color: #f6f8fa;
+}
+
+#cms_right td,
+#cms_right th {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}
+
+.cms_btn_box {
+    margin: 13px 0px;
+    text-align: end;
+}

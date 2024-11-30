@@ -1,0 +1,959 @@
+<%- include("../../partials/headerlinks") %>
+    <%- include("../../partials/header") %>
+        <%- include("../../partials/sidebar") %>
+<style>
+    .thum_img{
+        width: 100%;
+    }
+    .th_img{
+    width: 100%;
+    }
+    .bb_img{
+     width: 100%;
+    }
+    audio {
+  border-radius: 0px;
+}
+</style>
+            <!-- Vertical Overlay-->
+            <div class="vertical-overlay"></div>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">
+                                        Create
+                                    </h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="<%= adminbaseurl %>dashboard">Ecommerce</a>
+                                            </li>
+                                            <li class="breadcrumb-item active">Create Product</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <form method="post" action="/admin/product/form" id="createproduct-form" autocomplete="off" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="mb-3" style="display: none">
+                                                <input type="hidden" class="form-control" id="id" name="id" value="<%=product.id || '' %>" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="product-title-input">Title</label>
+                                                <input type="text" class="form-control" id="product-title-input" name="title" value="<%=product.title%>" placeholder="Enter product title" required>
+                                                <div class="invalid-feedback">Please Enter a product title.</div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label" for="short-description">Short Description</label>
+                                                <textarea class="form-control" id="short-description" name="short_description" placeholder="Enter short description" required><%=product.short_description%></textarea>
+                                            </div>
+ 
+                                            <div id="content_div" style="display: none;">
+                                                        <label class="form-label" for="content-f">Content</label>
+                                                        <textarea id="contentForCkeditot" class="form-control ckeditor-classic" name="content" placeholder="Enter content"><%=product.content%></textarea>
+                                                    <!-- <span class="text-danger font-weight-bold" id="name_error"></span> -->
+                                            </div>               
+                                        </div>
+                                    </div>
+                                    <!-- end card -->
+
+                                      
+                                     <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Thumbnail Images</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-4 text-center">
+                                                            <h5 class="fs-14 mb-1">Thumbnail (Landscape)</h5>
+                                                            <p class="text-muted">Add Product main Image.</p>
+                                                            <% if (product?.thumbnail_landscape) { %>
+                                                            <div class="text-center">
+                                                                <div class="position-relative d-inline-block">
+                                                                    <div class="position-absolute top-100 start-100 translate-middle">
+                                                                        <label class="landscape" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                                                    <div class="avatar-xs">
+                                                                        <div
+                                                                            class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                            <i class="ri-image-fill"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                                        <input class="form-control d-none" value="" name="thumbnail_landscape" id="thumbnail_landscape"  type="file" accept=".png, .jpeg, .jpg" onchange="previewImageLandscape();">
+                                                                    </div>
+                                                                    <div class="avatar-lg">
+                                                                        <div class="avatar-title bg-light rounded">
+                                                                            <img src="<%=baseurl%>admin/contents/product/<%=product.thumbnail_landscape %>" class="product-img thum_img" id="product-img" class="avatar-md h-auto" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <% }else{ %>
+                                                            
+                                                            <div class="text-center">
+                                                                <div class="position-relative d-inline-block">
+                                                                    <div class="position-absolute top-100 start-100 translate-middle">
+                                                                        <label class="landscape" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                                                    <div class="avatar-xs">
+                                                                        <div
+                                                                            class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                            <i class="ri-image-fill"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                                        <input class="form-control d-none" value="" name="thumbnail_landscape" id="thumbnail_landscape"  type="file" accept=".png, .jpeg, .jpg" onchange="previewImageLandscape();">
+                                                                    </div>
+                                                                    <div class="avatar-lg">
+                                                                        <div class="avatar-title bg-light rounded">
+                                                                            <img src="" class="product-img thum_img" id="product-img" class="avatar-md h-auto" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <div class="mb-4 text-center">
+                                                            <h5 class="fs-14 mb-1">Thumbnail (Portrait)</h5>
+                                                            <p class="text-muted">Add Product main Image.</p>
+                                                            <% if (product?.thumbnail_portrait) { %>
+                                                            <div class="text-center">
+                                                                <div class="position-relative d-inline-block">
+                                                                    <div class="position-absolute top-100 start-100 translate-middle">
+                                                                        <label class="potrait" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                                                            <div class="avatar-xs">
+                                                                                <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                                    <i class="ri-image-fill"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                        <input class="form-control d-none" value="" name="thumbnail_portrait" id="thumbnail_portrait" type="file" accept=".png, .jpeg, .jpg" onchange="previewImagePotrait();">
+                                                                    </div>
+                                                                    <div class="avatar-lg">
+                                                                        <div class="avatar-title bg-light rounded">
+                                                                            <img src="<%=baseurl%>admin/contents/product/<%=product.thumbnail_portrait %>"
+                                                                                class="product-image th_img" id="product-image" class="avatar-md h-auto" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <% }else{ %>
+                                                            <div class="text-center">
+                                                                <div class="position-relative d-inline-block">
+                                                                    <div class="position-absolute top-100 start-100 translate-middle">
+                                                                        <label class="potrait" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                                                            <div class="avatar-xs">
+                                                                                <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                                    <i class="ri-image-fill"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                        <input class="form-control d-none" value="" name="thumbnail_portrait" id="thumbnail_portrait" type="file" accept=".png, .jpeg, .jpg" onchange="previewImagePotrait();">
+                                                                    </div>
+                                                                    <div class="avatar-lg">
+                                                                        <div class="avatar-title bg-light rounded">
+                                                                            <img src="" class="product-image th_img" id="product-image" class="avatar-md h-auto" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <!-- end card -->
+
+
+
+                                
+                                            <div class="card" id="pdf_div" style="display: none;">
+                                                <div class="card-header">
+                                                    <h5 class="card-title mb-0">Upload E-Magazine PDFs</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-6" >
+                                                                <div class="mb-4 text-center">
+                                                                    <h5 class="fs-14 mb-1">PDF/DOC (Preview)</h5>
+                                                                    <!-- <div class="text-center">
+                                                                        <div class="position-relative d-inline-block">
+                                                                            <div class="position-absolute top-100 start-100 translate-middle">
+                                                                                <label class="preview" data-bs-toggle="tooltip" data-bs-placement="right"
+                                                                                    title="Select Image">
+                                                                                    <div class="avatar-xs">
+                                                                                        <div
+                                                                                            class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                                            <i class="ri-image-fill"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <input class="form-control d-none" value="" id="magazine_preview" name="magazine_preview" type="file" accept="application/pdf, application/document" onchange="previewPDF()">
+                                                                            </div>
+                                                                            <div class="avatar-lg">
+                                                                                <div class="avatar-title bg-light rounded">
+                                                                                    <file src="" class="" id="pdf_preview" class="avatar-md h-auto" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <% if (product?.magazine_preview) { %>
+                                                                    <input type="file" id="pdf-upload" name="magazine_preview" value="<%=product.magazine_preview %>" />
+                                                                        <hr/>
+                                                                        <canvas class="page" size="A4" layout="landscape" ></canvas>
+                                                                        <pdf controls src="<%=baseurl%>admin/contents/product/pdf/<%=product.magazine_preview %>" ></pdf>
+                                                                        <% }else{ %>
+                                                                            <input type="file" id="pdf-upload" name="magazine_preview" />
+                                                                        <hr/>
+                                                                        <canvas class="page" size="A4" layout="landscape"></canvas>
+                                                                        <pdf controls src=""></pdf>
+                                                                            <% } %>
+                                                                </div>
+                                                            </div>
+                                        
+                                                            <div class="col-6">
+                                                                <div class="mb-4 text-center">
+                                                                    <h5 class="fs-14 mb-1">PDF/DOC(Full)</h5>
+                                                                    <!-- <div class="text-center">
+                                                                        <div class="position-relative d-inline-block">
+                                                                            <div class="position-absolute top-100 start-100 translate-middle">
+                                                                                <label for="pdf-full" class="mb-0" data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="right" title="Select Image">
+                                                                                    <div class="avatar-xs">
+                                                                                        <div
+                                                                                            class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                                            <i class="ri-image-fill"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </label>
+                                                                                <input class="form-control d-none" value="" id="pdf-full" name="magazine_full"
+                                                                                    type="file">
+                                                                            </div>
+                                                                            <div class="avatar-lg">
+                                                                                <div class="avatar-title bg-light rounded">
+                                                                                    <img src="" id="product-img" class="avatar-md h-auto" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+
+                                                                    <% if (product?.magazine_full) { %>
+                                                                        <input type="file" id="pdf-full" name="magazine_full" />
+                                                                            <hr/>
+                                                                            <canvas class="page" size="A4" layout="landscape"></canvas>
+                                                                            <pdf controls src="<%=baseurl%>admin/contents/product/pdf/<%=product.magazine_full %>"></pdf>
+                                                                            <% }else{ %>
+                                                                                <input type="file" id="pdf-full" name="magazine_full"/>
+                                                                            <hr/>
+                                                                            <canvas class="page" size="A4" layout="landscape"></canvas>
+                                                                            <pdf controls src=""></pdf>
+                                                                                <% } %>
+                                        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- end card -->
+                                    
+                                            <div class="card" id="audio_div" style="display: none;">
+                                                <div class="card-header">
+                                                    <h5 class="card-title mb-0">Upload Audio File</h5>
+                                                </div>
+                                                <% if (product?.audio) { %>
+                                                <div class="card-body">
+                                                    <input type="file" id="audioInput" name="audio" onchange="previewFile()" accept="audio/*"><br>
+                                                    <audio controls src="<%=baseurl%>admin/contents/product/audio/<%=product.audio %>"></audio>
+                                                </div>
+                                            </div>
+                                            <% }else{ %>
+                                            <div class="card-body">
+                                                <input type="file" id="audioInput" name="audio" onchange="previewFile()" accept="audio/*"><br>
+                                                <audio controls src=""></audio>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                        <!-- end card -->
+                                   
+
+
+
+
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
+                                                        <!-- <li class="nav-item">
+                                            <a class="nav-link active" data-bs-toggle="tab"
+                                                href="#addproduct-general-info" role="tab">
+                                                General Info
+                                            </a>
+                                        </li> -->
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
+                                                Meta Data
+                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- end card header -->
+                                                <div class="card-body">
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane" id="addproduct-general-info" role="tabpanel">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="manufacturer-name-input">Manufacturer
+                                                            Name</label>
+                                                                        <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Enter manufacturer name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="manufacturer-brand-input">Manufacturer
+                                                            Brand</label>
+                                                                        <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Enter manufacturer brand">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end row -->
+
+                                                            <div class="row">
+                                                                <div class="col-lg-3 col-sm-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="stocks-input">Stocks</label>
+                                                                        <input type="text" class="form-control" id="stocks-input" placeholder="Stocks">
+                                                                        <div class="invalid-feedback">Please Enter a product stocks.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3 col-sm-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="product-price-input">Price</label>
+                                                                        <div class="input-group has-validation mb-3">
+                                                                            <span class="input-group-text" id="product-price-addon">$</span>
+                                                                            <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon">
+                                                                            <div class="invalid-feedback">Please Enter a product price.
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3 col-sm-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="product-discount-input">Discount</label>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="product-discount-addon">%</span>
+                                                                            <input type="text" class="form-control" id="product-discount-input" placeholder="Enter discount" aria-label="discount" aria-describedby="product-discount-addon">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3 col-sm-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="orders-input">Orders</label>
+                                                                        <input type="text" class="form-control" id="orders-input" placeholder="Orders">
+                                                                        <div class="invalid-feedback">Please Enter a product orders.</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end row -->
+                                                        </div>
+                                                        <!-- end tab-pane -->
+
+                                                        <div class="tab-pane active" id="addproduct-metadata" role="tabpanel">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="meta-title">Meta Title</label>
+                                                                        <input type="text" class="form-control" name="meta_title" value="<%=product.meta_title%>" id="meta-title" placeholder="Enter meta title" >
+                                                                    </div>
+                                                                </div>
+                                                                <!-- end col -->
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="meta-keywords">Meta Keywords</label>
+                                                                        <input type="text" class="form-control" name="meta_keywords" value="<%=product.meta_keywords%>" id="meta-keywords" placeholder="Enter meta keywords" >
+                                                                    </div>
+                                                                </div>
+                                                                <!-- end col -->
+                                                            </div>
+                                                            <!-- end row -->
+
+                                                            <div>
+                                                                <label class="form-label" for="meta-description">Meta Description</label>
+                                                                <textarea class="form-control" id="meta-description" name="meta_description" placeholder="Enter meta description" rows="3" ><%=product.meta_description%></textarea>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <!-- end tab pane -->
+
+                                                        <!-- end tab content -->
+                                                    </div>
+                                                    <!-- end card body -->
+                                                </div>
+                                                <!-- end card -->
+
+                                            </div>
+                                            <!-- end col -->
+
+                                            <div class="card">
+
+                                                <!-- end card header -->
+                                                <div class="card-body">
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" id="addproduct-ogdata" role="tabpanel">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="meta-title">Og Title</label>
+                                                                        <input type="text" class="form-control" name="og_title" value="<%=product.og_title%>" placeholder="Enter og title" id="og-title" >
+                                                                    </div>
+                                                                </div>
+                                                                <!-- end col -->
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="meta-keywords">Og Url</label>
+                                                                        <input type="text" class="form-control" name="og_url" value="<%=product.og_url%>"  id="og-url"  placeholder="https://example.com" pattern="https://.*">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- end col -->
+                                                            </div>
+                                                            <!-- end row -->
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label" for="meta-keywords">Og Type</label>
+                                                                        <input type="text" class="form-control" name="og_type" value="<%=product.og_type%>" placeholder="Enter Og Type" id="og-type" >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-4">
+                                                                        <h5 class="fs-14 mb-1">Og Image</h5>
+                                                                        <p class="text-muted">Add Product og image</p>
+                                                                        <div class="">
+                                                                            <% if (product.og_Image) { %>
+                                                                                <div class="position-relative d-inline-block">
+                                                                                    <div class="position-absolute top-100 start-100 translate-middle">
+                                                                                        <label class="og_Image" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                                                                            <div class="avatar-xs">
+                                                                                                <div
+                                                                                                    class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                                                    <i class="ri-image-fill"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </label>
+                                                                                        <input class="form-control d-none" value="" name="og_image" id="og_image" type="file" accept=".png, .jpeg, .jpg" onchange="previewImageOg();">
+                                                                                    </div>
+                                                                                    <div class="avatar-lg">
+                                                                                        <div class="avatar-title bg-light rounded">
+                                                                                            <img src="<%=baseurl%>admin/contents/product/<%=product.og_image %>" class="prod-img bb_img"  id="prod-img" class="avatar-md h-auto" />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            <% }else{ %>
+                                                                                <div class="position-relative d-inline-block">
+                                                                                    <div class="position-absolute top-100 start-100 translate-middle">
+                                                                                        <label class="og_Image" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                                                                            <div class="avatar-xs">
+                                                                                                <div
+                                                                                                    class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                                                    <i class="ri-image-fill"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </label>
+                                                                                        <input class="form-control d-none" value="" name="og_image" id="og_image" type="file" accept=".png, .jpeg, .jpg" onchange="previewImageOg();">
+                                                                                    </div>
+                                                                                    <div class="avatar-lg">
+                                                                                        <div class="avatar-title bg-light rounded">
+                                                                                            <img src="" class="prod-img bb_img"  id="prod-img" class="avatar-md h-auto" />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <% } %>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <!-- end card body -->
+                                                    <div class="text-end mb-3 mr-1">
+                                                        <button type="button" class="btn btn-secondary w-sm" onclick="history.back()">Back</button>
+                                                        <input type="hidden" name="id" id="id" value="<%=product.id%>">
+                                                        <!-- <input type="hidden" name="type" id="type" value="<%=type%>"> -->
+                                                        <!-- <button type="submit" class="btn btn-success w-sm">Submit</button> -->
+                                                        <button class="btn btn-primary" type="submit"><%= product != "" ? 'Update product' : 'Create product'%></button>
+                                                    </div>
+                                                </div>
+                                                <!-- end card -->
+
+                                            </div>
+
+
+
+                                            <!-- end col -->
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="type" class="form-label">Type</label>
+                                                    <select class="form-select " id="type" name="type" onchange="openform(this.value)" required>
+                                                        <option value="">Choose...</option>
+                                                        <option value="article"<%=product.type=="article" ? 'selected="selected"' : '' %>>Article</option>
+                                                        <option value="emagazine"<%=product.type=="emagazine" ? 'selected="selected"' : '' %>>E-Magazine</option>
+                                                        <option value="news"<%=product.type=="news" ? 'selected="selected"' : '' %>>News</option>
+                                                    </select>
+                                                </div>
+
+                                            
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-0">Publish</h5>
+                                                <div class="mb-3">
+                                                    <label for="status-f" class="form-label">Status</label>
+                                                    <select class="form-select" id="status-f" name="status" data-choices data-choices-search-false>
+                                                        <option value="">choose..</option>
+                                                        <option value="published" <%=product.status=="published" ? 'selected="selected"' : '' %>>Published
+                                                        </option>
+                                                        <option value="scheduled" <%=product.status=="scheduled" ? 'selected="selected"' : '' %>>Scheduled
+                                                        </option>
+                                                        <option value="draft" <%=product.status=="draft" ? 'selected="selected"' : '' %>>Draft</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="published_datetime" class="form-label">Publish Date & Time</label>
+                                                    <input type="date" id="published_datetime" name="published_datetime"
+                                                         class="form-control" placeholder="Enter publish date"
+                                                        data-provider="flatpickr" data-date-format="d.m.y" data-enable-time>
+                                                </div>
+                                            </div>
+                                            <!-- end card body -->
+                                        </div>
+                                    
+                                    
+                                    
+                                        <!-- end card -->
+                                    
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Subscription</h5>
+                                            </div>
+                                            <!-- end card body -->
+                                            <div class="card-body">
+                                                <div>
+                                                    <!-- <label for="subscription" class="form-label">Subscription</label> -->
+                                                    <select class="form-select" id="subscription" name="subscription" data-choices
+                                                        data-choices-search-false>
+                                                        <option value="Free" <%=product.subscription=="Free" ? 'selected="selected"' : '' %>>Free</option>
+                                                        <option value="Paid" <%=product.subscription=="Paid" ? 'selected="selected"' : '' %>>Paid</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end card -->
+                                    
+
+                                        <div class="card">
+                                            <div class="card-body" style="padding: unset;">
+                                                <div class="row">
+                                                    <div class="col-mb-12" id="category_div" style="display: none;">
+                                                        <div class="card-header align-items-center category_box">
+                                                            <label class="card-title">Category</label>
+                                                            <select name="category_id" id="category_id" 
+                                                                    class="form-select" >
+                                                                    <option value="">Select Category</option>
+                                                                   
+                                                                 
+                                                                </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <!-- end card -->
+                                    
+                                    
+                                        <div class="card" id="tagsDiv" style="display: none;">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Tags</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="hstack gap-3 align-items-start">
+                                                    <div class="flex-grow-1">
+                                                        <input class="form-control" data-choices data-choices-multiple-remove="true"
+                                                            placeholder="Enter tags" type="text" name="tags" value="<%=product.tags%>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end card body -->
+                                        </div>
+                                        <!-- end card -->
+                                    </div>
+                                <!-- end row -->
+
+                        </form>
+
+                        </div>
+                        <!-- container-fluid -->
+                    </div>
+                    <!-- End Page-content -->
+
+                    <footer class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script> © Velzon.
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-sm-end d-none d-sm-block">
+                                        Design & Develop by Themesbrand
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+                <!-- END layout-wrapper -->
+
+
+                <%- include("../../partials/footerlinks") %>
+                    <%- include("../../partials/footer") %>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+     $(document).ready(function() {
+        $(".landscape").click(function() {
+            $("#thumbnail_landscape").trigger("click");
+        });
+    });
+
+    function previewImageLandscape() {
+    let fileInput = document.getElementById("thumbnail_landscape");
+    let file = fileInput.files[0];
+    if (file) {
+      let fileType = file.type;
+      let validExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
+      if (validExtensions.includes(fileType)) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          var output = document.getElementById('product-img');
+          output.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+
+</script>
+
+<script>
+    $(document).ready(function() {
+       $(".potrait").click(function() {
+           $("#thumbnail_portrait").trigger("click");
+       });
+   });
+
+   function previewImagePotrait() {
+   let fileInput = document.getElementById("thumbnail_portrait");
+   let file = fileInput.files[0];
+   if (file) {
+     let fileType = file.type;
+     let validExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
+     if (validExtensions.includes(fileType)) {
+       let reader = new FileReader();
+       reader.onload = (e) => {
+         var output = document.getElementById('product-image');
+         output.src = e.target.result;
+       };
+       reader.readAsDataURL(file);
+     }
+   }
+ }
+
+</script>
+
+
+
+
+<script>
+    $(document).ready(function() {
+       $(".og_Image").click(function() {
+           $("#og_image").trigger("click");
+       });
+   });
+
+   function previewImageOg() {
+   let fileInput = document.getElementById("og_image");
+   let file = fileInput.files[0];
+   if (file) {
+     let fileType = file.type;
+     let validExtensions = ['image/png', 'image/jpeg', 'image/jpg'];
+     if (validExtensions.includes(fileType)) {
+       let reader = new FileReader();
+       reader.onload = (e) => {
+         var output = document.getElementById('prod-img');
+         output.src = e.target.result;
+       };
+       reader.readAsDataURL(file);
+     }
+   }
+ }
+
+
+
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        const value=$("#type").val()
+        openform(value)
+    })
+ function openform(type) {
+    if (type=="article" ) {
+        $("#content_div").show();
+        $("#category_div").show();
+        $("#pdf_div").hide();
+        $("#audio_div").hide();
+        $("#tagsDiv").hide();
+    }else if(type=="emagazine"){
+        $("#pdf_div").show();
+        $("#audio_div").show();
+        $("#content_div").hide();
+        $("#category_div").hide();
+        $("#tagsDiv").hide();
+    }else if(type=="news"){
+        $("#content_div").show();
+        $("#pdf_div").hide();
+        $("#audio_div").hide();
+        $("#category_div").hide();
+        $("#tagsDiv").show();
+    }
+ }
+
+</script>
+
+
+     <script>
+        $(document).ready(()=>{
+            const date = `<%=product?.published_datetime %>`
+            if(date){
+                const formatedDate = new Date(date).toISOString().split("T")[0];
+                $("#published_datetime").val(formatedDate);
+            }
+        })
+
+        const statusDropdown = document.getElementById("status-f");
+        const publishDatetimeInput = document.getElementById("published_datetime");
+      
+
+        statusDropdown.addEventListener("change", function () {
+           changeDropdown(statusDropdown.value)
+        });
+
+        function changeDropdown(value){
+            if (value === "published") {
+                const currentDate = new Date().toISOString().split("T")[0];
+                publishDatetimeInput.value = currentDate;
+                publishDatetimeInput.disabled = false; 
+            } else if (value === "scheduled") {
+                publishDatetimeInput.value = "<%=product.published_datetime%>"; 
+                publishDatetimeInput.disabled = false; 
+            } else {
+                publishDatetimeInput.value = ""; 
+                publishDatetimeInput.disabled = true; 
+            }
+        }
+        
+    </script> 
+ <!-- <script src="<%=baseurl%>assets/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>  -->
+ <script>
+ 
+    CKEDITOR.editorConfig = function (config) {
+        // Customize CKEditor configuration options
+        config.language = 'es'; // Set the language to Spanish
+        config.uiColor = '#F7B42C'; // Set the UI color to a specific value
+        config.height = 300; // Set the editor height to 300 pixels
+        config.toolbarCanCollapse = true; // Enable toolbar collapsing
+    };
+    // Replace the textarea with CKEditor
+    // var editor = CKEDITOR.replace('contentForCkeditot');
+    var editor = CKEDITOR.replace('contentForCkeditot',{
+        filebrowserUploadUrl: "add-ckeditor-image",
+        extraPlugins: "filebrowser",
+        filebrowserUploadMethod : 'form'
+    });
+    
+
+    // Remove HTML tags from the editor content
+    // function removeHtmlTags() {
+    //     var content = editor.getData(); // Get the content from the editor
+    //     var sanitizedContent = content.replace(/(<([^>]+)>)/gi, ''); // Remove all HTML tags from the content
+    //     editor.setData(sanitizedContent); // Set the sanitized content back to the editor
+    // }
+</script> 
+    
+
+
+<script src="path/to/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+      $("#type").on("change", updatePayeerOptions);
+      var selectedType = $("#type").val();
+      if(selectedType){
+        updatePayeerOptions()
+      }
+    });
+  
+    function updatePayeerOptions() {
+      var selectedType = $("#type").val();
+      const selectedId = `<%=product?.category_id%>`
+
+      $.ajax({
+        url: "<%= adminbaseurl %>product/get-category", 
+        type: "GET",
+        data: { type: selectedType },
+        success: function (response) {
+          $("#category_id").empty();
+          $("#category_id").append("<option value=''>Select...</option>");
+          response.category.forEach(function (payeer) {
+            $("#category_id").append(`<option value='${payeer.id}' ${selectedId == payeer.id ? 'selected' : ''}>${payeer.name}</option>`);
+          });
+        },
+        error: function (e) {
+          console.log("ERROR:", e);
+        },
+      });
+    }
+  </script>
+
+
+<script>
+    document.querySelector("#pdf-upload").addEventListener("change", function(e){
+var canvasElement = document.querySelector("canvas")
+var file = e.target.files[0]
+if(file.type != "application/pdf"){
+console.error(file.name, "is not a pdf file.")
+return
+}
+
+var fileReader = new FileReader();  
+
+fileReader.onload = async (result) => {
+var typeArray = new Uint8Array(result.target.result);
+const pdf = await PDFJS.getDocument(typeArray)
+// you can now use *pdf* here
+console.log("the pdf has a ",pdf.numPages, "page(s).")
+const page = await pdf.getPage(pdf.numPages)
+// you can now use *page* here
+var viewport = page.getViewport(2.0);
+var canvas = document.querySelector("canvas")
+canvas.height = viewport.height;
+canvas.width = viewport.width;
+
+page.render({
+canvasContext: canvas.getContext('2d'),
+viewport: viewport
+});
+};
+
+fileReader.readAsArrayBuffer(file);
+})
+</script>
+
+<script>
+    document.querySelector("#pdf-full").addEventListener("change", function(e){
+var canvasElement = document.querySelector("canvas")
+var file = e.target.files[0]
+if(file.type != "application/pdf"){
+console.error(file.name, "is not a pdf file.")
+return
+}
+
+var fileReader = new FileReader();  
+
+fileReader.onload = async (result) => {
+var typeArray = new Uint8Array(result.target.result);
+const pdf = await PDFJS.getDocument(typeArray)
+// you can now use *pdf* here
+console.log("the pdf has a ",pdf.numPages, "page(s).")
+const page = await pdf.getPage(pdf.numPages)
+// you can now use *page* here
+var viewport = page.getViewport(2.0);
+var canvas = document.querySelector("canvas")
+canvas.height = viewport.height;
+canvas.width = viewport.width;
+
+page.render({
+canvasContext: canvas.getContext('2d'),
+viewport: viewport
+});
+};
+
+fileReader.readAsArrayBuffer(file);
+})
+</script>
+
+  <script>
+        function previewFile() {
+            var preview = document.querySelector('audio');
+            var fileInput = document.getElementById('audioInput');
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Attach the previewFile function to the change event of the input element
+        document.getElementById('audioInput').addEventListener('change', previewFile, false);
+    </script>
+    
