@@ -10,7 +10,7 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const SECRET = process.env.JWT_SECRET_KEY;
 const path = require('path');
-
+const api_key = ;
 
 require('dotenv').config();
 
